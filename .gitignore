@@ -13,3 +13,4 @@ __pycache__/
 .tox
 .cache
 check_rst.py
+.vscode/
