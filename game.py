@@ -13,14 +13,14 @@ surface = surface.convert()
 surface.fill((255,255,255))
 clock = pygame.time.Clock()
 
-rex = Animation("rex.png")
+rex = Animation("rex_alfa.png")
 rex.create_animation(0, 110, 50, 57, "run", duration=120, rows=1, cols=2)
 rex.x = 150
-rex.y = 248
+rex.y = 260
 screen.blit(surface, (0, 0))
 
 # cloud
-sprite = pygame.image.load("rex.png").convert()
+sprite = pygame.image.load("rex_alfa.png").convert()
 crop_rect = (470, 5, 50, 25)
 cloud1 = sprite.subsurface(crop_rect)
 clouds_positions = [[random.randint(400, 600), random.randint(20,200)] for i in range(10)]
@@ -35,9 +35,9 @@ cactus_posx = [600, 900]
 def s(s0,v0,a,t):
     return s0 + v0*t + (1/2)*a*t**2 
 jump = False
-gravity = 3
+gravity = 5
 time1 = time.time()
-velocidade = 20
+velocidade = 100
 
 if __name__ == '__main__':
     while True:
@@ -54,7 +54,7 @@ if __name__ == '__main__':
                   
         t =  time.time() - time1
         #print(t)
-        if velocidade < 35 and rex.y <= 248: 
+        if velocidade < 100 and rex.y <= 248: 
             rex.y += (int(velocidade*t)) 
             velocidade += gravity*t
         
@@ -75,7 +75,7 @@ if __name__ == '__main__':
                 clouds_positions[i][1] = random.randint(20, 200)
 
         for i, posx in enumerate(cactus_posx):
-            cactus_posx[i] -= 3
+            cactus_posx[i] -= 5
             screen.blit(cactus, (posx,258))
             if posx < 100:
                 cactus_posx[i] = random.randint(800, 1500)
