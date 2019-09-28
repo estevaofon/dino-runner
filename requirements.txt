@@ -1,0 +1,2 @@
+pyanimation==0.7
+pygame==1.9.6
