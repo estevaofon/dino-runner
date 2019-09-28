@@ -3,9 +3,11 @@ import sys
 from pyanimation import Animation
 import random
 import time
+import os
 
 pygame.init()
 
+BASEDIR =  os.path.dirname(os.path.abspath(__file__))
 SCREEN_WIDTH, SCREEN_HEIGHT = 800, 400
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
 surface = pygame.Surface(screen.get_size())
@@ -13,14 +15,15 @@ surface = surface.convert()
 surface.fill((255,255,255))
 clock = pygame.time.Clock()
 
-rex = Animation("rex_alfa.png")
+rex_sprite_path = os.path.join(BASEDIR, "images/sprites", "rex_alfa.png")
+rex = Animation(rex_sprite_path)
 rex.create_animation(0, 110, 50, 57, "run", duration=120, rows=1, cols=2)
 rex.x = 150
 rex.y = 260
 screen.blit(surface, (0, 0))
 
 # cloud
-sprite = pygame.image.load("rex_alfa.png").convert()
+sprite = pygame.image.load(rex_sprite_path).convert()
 crop_rect = (470, 5, 50, 25)
 cloud1 = sprite.subsurface(crop_rect)
 clouds_positions = [[random.randint(400, 600), random.randint(20,200)] for i in range(10)]
