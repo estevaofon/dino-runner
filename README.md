@@ -4,4 +4,4 @@ Dino Runner in Python
 $ pip install -r requirements.txt
 $ python game.py 
 ```
-<img src="/images/sprites/screenshot.png" width="300px">
+<img src="/images/screenshot.png" width="300px">
