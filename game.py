@@ -39,7 +39,7 @@ sprite = pygame.image.load(rex_sprite_path).convert()
 
 cactus_posx = [600, 900]
 cactus_list_coord = [[x, 258] for x in cactus_posx]
-cactus_obj = ScenarioElement(sprite, (148, 55, 60, 48), cactus_list_coord)
+cactus_obj = ScenarioElement(sprite, (148, 55, 60, 58), cactus_list_coord)
 terrain_posx = [0, 480, 960]
 terrain_list_coord = [[x, 300] for x in terrain_posx]
 terrain_obj = ScenarioElement(sprite, (20, 268, 540, 20), terrain_list_coord)
@@ -51,7 +51,7 @@ gravity = 5
 time1 = time.time()
 velocidade = 100
 jumping = False
-game_speed = 1.3
+game_speed = 1.2
 pontos = 0
 myfont = pygame.font.SysFont('Comic Sans MS', 30)
 game_over = False
@@ -103,23 +103,26 @@ if __name__ == '__main__':
                     if rex.y >= 250:
                         sounda.play()
                         time1 = time.time()
-                        velocidade = -37
+                        velocidade = -35
                         rex.y = 250
-
+                        gravity = 5
+        print(velocidade)
         t = time.time() - time1
         if velocidade < 100 and rex.y <= 250:
+            if velocidade > 0: 
+                gravity = 3
             rex.y += (int(velocidade*t))
             velocidade += gravity*t
 
         surface.fill((255, 255, 255))
         screen.blit(surface, (0, 0))
-        rex_rect = pygame.Rect(rex.x+2, rex.y, 40, 60)
+        rex_rect = pygame.Rect(rex.x+8, rex.y, 26, 60)
         pygame.draw.rect(screen, (255, 0, 0), rex_rect)
 
-        if check_collision_with_list(rex_rect, cactus_obj, green, obs_dx=10, obs_dy=10):
+        if check_collision_with_list(rex_rect, cactus_obj, green, obs_dx=10, obs_dy=15):
             game_over = True
-        if check_collision_with_list(rex_rect, cloud_obj, blue):
-            game_over = True
+        #if check_collision_with_list(rex_rect, cloud_obj, blue):
+        #    game_over = True
 
         move_element(terrain_obj, game_speed, 3, -500, 960, terrain_obj.coord_list[0][1])
         move_element(cloud_obj, game_speed, 1, 0, random.randint(800, 1200),
